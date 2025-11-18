@@ -4,7 +4,8 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Check } from "lucide-react";
-// import { Header } from "@/components/Header"; <--- REMOVED (Assuming it's in layout.tsx)
+import { Header } from "@/components/Header"; // Make sure Header.tsx is in components folder
+// NOTE: For production, move <Header /> and <Footer /> to your layout.tsx file.
 
 type Industry = {
   id: string;
@@ -37,8 +38,10 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900">
-      
-      <main> {/* Removed pt-16 if padding is handled in layout or if you prefer manual spacing here */}
+      {/* 1. MOBILE NAV FIX: Using the Component */}
+      <Header />
+
+      <main className="pt-16">
         {/* HERO SECTION */}
         <section className="bg-white overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -365,6 +368,48 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+
+        {/* FOOTER */}
+        <footer className="bg-white border-t py-12">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="col-span-1 md:col-span-1">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#2C6CF2] to-[#7A4BFF] flex items-center justify-center text-white font-bold">KW</div>
+                <div className="font-bold text-xl">Hikewa</div>
+              </div>
+              <p className="text-xs text-gray-500">
+                AI-powered business OS for Solopreneurs & Agencies.
+                <br/>© 2025 Hikewa Inc.
+              </p>
+            </div>
+
+            <div>
+              <div className="font-bold mb-4">Product</div>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li><a href="/product" className="hover:text-[#2C6CF2]">CRM & Auto</a></li>
+                <li><a href="/pricing" className="hover:text-[#2C6CF2]">Pricing</a></li>
+                <li><a href="/dfy" className="hover:text-[#2C6CF2]">DFY Services</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <div className="font-bold mb-4">Company</div>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li><a href="/about" className="hover:text-[#2C6CF2]">About Us</a></li>
+                <li><a href="/contact" className="hover:text-[#2C6CF2]">Contact</a></li>
+                <li><a href="/blog" className="hover:text-[#2C6CF2]">Blog</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <div className="font-bold mb-4">Legal</div>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li><a href="/privacy" className="hover:text-[#2C6CF2]">Privacy</a></li>
+                <li><a href="/terms" className="hover:text-[#2C6CF2]">Terms</a></li>
+              </ul>
+            </div>
+          </div>
+        </footer>
 
         {/* ----------------------------- */}
         {/* INDUSTRY DEMO MODAL (Updated) */}
