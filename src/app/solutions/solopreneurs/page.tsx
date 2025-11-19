@@ -20,7 +20,7 @@ export default function SolopreneurPage() {
             You are a one-person army. Let our AI Agent handle the admin work, booking, and follow-ups so you can focus on your craft.
           </p>
           <Button asChild className="rounded-full bg-[#2C6CF2] px-8 py-6 text-lg shadow-lg">
-            <Link href="/start-free">Start Free Trial</Link>
+            <Link href="/signup">Start Free Trial</Link>
           </Button>
         </motion.div>
       </section>
@@ -72,7 +72,7 @@ export default function SolopreneurPage() {
         <div className="max-w-5xl mx-auto bg-[#2C6CF2] rounded-3xl p-12 text-center text-white">
           <h2 className="text-3xl font-bold mb-4">Too busy to set this up?</h2>
           <p className="text-xl text-blue-100 mb-8">Our DFY team will build your funnel and train Kewa for you in 48 hours.</p>
-          <Link href="/dfy" className="inline-flex items-center gap-2 bg-white text-[#2C6CF2] px-8 py-3 rounded-lg font-bold hover:bg-gray-50">
+          <Link href="/pricing" className="inline-flex items-center gap-2 bg-white text-[#2C6CF2] px-8 py-3 rounded-lg font-bold hover:bg-gray-50">
             Get DFY Setup <ArrowRight size={20}/>
           </Link>
         </div>

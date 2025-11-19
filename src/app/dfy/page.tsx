@@ -78,7 +78,7 @@ export default function DfyPage() {
 
           <div className="flex flex-wrap justify-center gap-4">
             <Button asChild className="rounded-full bg-[#2C6CF2] px-8 py-6 text-lg shadow-lg hover:bg-blue-600">
-              <Link href="#pricing">See Packages</Link>
+              <Link href="/pricing">See Packages</Link>
             </Button>
             <Button asChild variant="outline" className="rounded-full px-8 py-6 text-lg border-gray-300 text-gray-700">
               <Link href="/demo">Book Strategy Call</Link>
@@ -154,48 +154,6 @@ export default function DfyPage() {
         </div>
       </section>
 
-      {/* PRICING PACKAGES */}
-      <section id="pricing" className="py-24 bg-white">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-4">Simple, One-Time Setup Pricing</h2>
-          <p className="text-center text-gray-600 mb-12">No hidden fees. You pay for the setup once, then just your standard software subscription.</p>
-
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {packages.map((p) => (
-              <motion.div 
-                key={p.id} 
-                whileHover={{ y:-5 }} 
-                className={`p-8 rounded-2xl border ${p.popular ? "border-[#2C6CF2] ring-4 ring-blue-50 bg-white" : "bg-gray-50 border-transparent"}`}
-              >
-                {p.popular && <div className="text-[#2C6CF2] text-xs font-bold uppercase tracking-wide mb-2">Most Popular</div>}
-                <h3 className="text-2xl font-bold">{p.name}</h3>
-                <div className="text-4xl font-extrabold mt-4">{p.price}</div>
-                <p className="text-sm text-gray-500 mt-1">One-time setup fee</p>
-                <p className="text-gray-600 mt-4 text-sm">{p.desc}</p>
-
-                <div className="my-8 h-px bg-gray-200"></div>
-
-                <ul className="space-y-3 mb-8">
-                  {p.bullets.map((b) => (
-                    <li key={b} className="flex gap-3 items-center text-sm font-medium text-gray-700">
-                      <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
-                      {b}
-                    </li>
-                  ))}
-                </ul>
-
-                <Button asChild className={`w-full py-6 text-lg rounded-xl ${p.popular ? "bg-[#2C6CF2]" : "bg-gray-800"}`}>
-                  <Link href="/contact">{p.cta}</Link>
-                </Button>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="mt-12 text-center">
-             <p className="text-sm text-gray-500">Need a custom enterprise build? <Link href="/contact" className="text-[#2C6CF2] font-semibold underline">Contact Sales</Link></p>
-          </div>
-        </div>
-      </section>
 
       {/* GUARANTEE */}
       <section className="py-16 bg-gray-50 border-t border-gray-200">
@@ -208,35 +166,7 @@ export default function DfyPage() {
          </div>
       </section>
 
-      {/* FAQ */}
-      <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-6">
-          <h2 className="text-2xl font-bold text-center mb-10">Common Questions</h2>
-          <div className="space-y-4">
-            <details className="group bg-white p-5 rounded-xl border shadow-sm cursor-pointer">
-              <summary className="font-semibold flex justify-between items-center">
-                Do I still need to pay the monthly subscription?
-                <span className="transition group-open:rotate-180">▼</span>
-              </summary>
-              <div className="mt-3 text-gray-600 text-sm">Yes. The prices above are for the <strong>Done-For-You Setup Service</strong> (our team's time). You will still need a Hikewa software subscription (starting at $49/mo) to run the system.</div>
-            </details>
-            <details className="group bg-white p-5 rounded-xl border shadow-sm cursor-pointer">
-              <summary className="font-semibold flex justify-between items-center">
-                What happens after I pay?
-                <span className="transition group-open:rotate-180">▼</span>
-              </summary>
-              <div className="mt-3 text-gray-600 text-sm">You'll be redirected to our secure Onboarding Portal. There, you'll upload your logo, answer a few questions about your business, and connect your Google account. Then we get to work!</div>
-            </details>
-            <details className="group bg-white p-5 rounded-xl border shadow-sm cursor-pointer">
-              <summary className="font-semibold flex justify-between items-center">
-                Can I edit the funnels later?
-                <span className="transition group-open:rotate-180">▼</span>
-              </summary>
-              <div className="mt-3 text-gray-600 text-sm">Absolutely. Once we hand it over, it's 100% yours. You can use our drag-and-drop editor to change text, colors, or automations anytime.</div>
-            </details>
-          </div>
-        </div>
-      </section>
+      
 
     </main>
   );

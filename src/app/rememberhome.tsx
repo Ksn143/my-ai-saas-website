@@ -426,7 +426,7 @@ export default function HomePage() {
               <h3 className="text-3xl font-bold">Ready to automate?</h3>
               <p className="mt-4 text-white/90 text-lg leading-relaxed">Start your free trial or book a strategy call — no credit card required to chat.</p>
               <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                <a href="/signup" className="px-8 py-4 bg-white text-[#2C6CF2] rounded-xl font-bold text-center shadow-lg hover:bg-gray-50 transition-colors">Start Free Trial</a>
+                <a href="#start" className="px-8 py-4 bg-white text-[#2C6CF2] rounded-xl font-bold text-center shadow-lg hover:bg-gray-50 transition-colors">Start Free Trial</a>
                 <a href="/contact" className="px-8 py-4 border border-white/30 rounded-xl font-bold text-center hover:bg-white/10 transition-colors">Book Strategy Call</a>
               </div>
             </div>

@@ -82,7 +82,7 @@ export default function FeaturesPage() {
             
             <div className="flex flex-wrap justify-center gap-4">
               <Button asChild className="rounded-full bg-[#2C6CF2] px-8 py-6 text-lg shadow-lg hover:bg-blue-600">
-                <Link href="/start-free">Start Free Trial</Link>
+                <Link href="/signup">Start Free Trial</Link>
               </Button>
               <Button asChild variant="outline" className="rounded-full px-8 py-6 text-lg border-gray-300 text-gray-700">
                 <Link href="/demo">Watch Demo</Link>
@@ -157,7 +157,7 @@ export default function FeaturesPage() {
             <p className="text-xl text-blue-100 mb-8">
               You don't have to set this up yourself. Our expert team will build your funnels, import your contacts, and train Kewa for you.
             </p>
-            <Link href="/dfy" className="inline-flex items-center gap-2 bg-white text-[#2C6CF2] px-8 py-4 rounded-xl font-bold text-lg hover:bg-gray-50 transition-colors">
+            <Link href="/pricing" className="inline-flex items-center gap-2 bg-white text-[#2C6CF2] px-8 py-4 rounded-xl font-bold text-lg hover:bg-gray-50 transition-colors">
               See DFY Packages <ArrowRight size={20}/>
             </Link>
           </div>
@@ -198,7 +198,7 @@ export default function FeaturesPage() {
         <p className="text-gray-600 mb-10 text-lg">Join 100+ businesses running on autopilot.</p>
         <div className="flex justify-center gap-4">
           <Button asChild className="bg-[#2C6CF2] px-8 py-6 rounded-xl text-lg">
-            <Link href="/start-free">Get Started Free</Link>
+            <Link href="/signup">Get Started Free</Link>
           </Button>
         </div>
       </section>

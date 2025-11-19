@@ -1,9 +1,10 @@
+// src/app/layout.tsx
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
+// Header आणि Footer इथून काढून टाका, ते आता ClientLayout मध्ये आहेत
 import { ThemeProvider } from "@/components/theme-provider";
+import ClientLayout from "@/components/ClientLayout"; // <-- नवीन फाईल इम्पोर्ट करा
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,25 +19,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // 1. lang="en" करा (US SEO साठी महत्त्वाचे)
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} min-h-screen flex flex-col bg-gray-50`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="light" // SaaS साठी सहसा light थीम डिफॉल्ट असते
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >
-          {/* Header एकदाच इथे टाका */}
-          <Header />
-          
-          {/* मुख्य कंटेंट */}
-          <main className="flex-1 pt-16">
+          {/* Header आणि Footer आता या ClientLayout मध्ये हँडल केले जातील */}
+          <ClientLayout>
             {children}
-          </main>
+          </ClientLayout>
 
-          {/* Footer एकदाच इथे टाका */}
-          <Footer />
         </ThemeProvider>
       </body>
     </html>

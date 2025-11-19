@@ -211,7 +211,7 @@ export default function PricingPage() {
                         : "bg-white border-2 border-gray-200 text-gray-700 hover:border-gray-900 hover:bg-gray-50"
                   }`}
                 >
-                  <Link href={plan.id === 'enterprise' ? "/contact" : "/start-free"}>
+                  <Link href={plan.id === 'enterprise' ? "/contact" : "/signup"}>
                     {plan.cta}
                   </Link>
                 </Button>

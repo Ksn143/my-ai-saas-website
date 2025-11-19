@@ -72,9 +72,7 @@ export default function EnterprisePage() {
         <h2 className="text-3xl font-bold mb-6">Trusted by leading companies</h2>
         <div className="flex justify-center gap-8 opacity-50 grayscale mb-12">
            {/* Logos here */}
-           <span className="text-2xl font-bold">ACME Corp</span>
-           <span className="text-2xl font-bold">GlobalTech</span>
-           <span className="text-2xl font-bold">LogiStick</span>
+           
         </div>
         <div className="bg-[#2C6CF2] text-white max-w-4xl mx-auto rounded-2xl p-10">
              <h3 className="text-2xl font-bold mb-4">Need a Custom Solution?</h3>

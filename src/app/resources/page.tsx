@@ -195,7 +195,7 @@ export default function ResourcesPage() {
             
             <div className="shrink-0">
               <Button asChild className="bg-white text-[#2C6CF2] px-8 py-6 rounded-xl text-lg font-bold hover:bg-gray-50 shadow-lg">
-                <Link href="/dfy">Start DFY Setup</Link>
+                <Link href="/pricing">Start DFY Setup</Link>
               </Button>
             </div>
           </div>
