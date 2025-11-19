@@ -1,13 +1,17 @@
 'use server'
 
+// 1. योग्य Imports
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
+
+// 2. createClient फंक्शन योग्यरित्या इम्पोर्ट करा
+// (तुमच्याकडे src/lib/supabase/server.ts ही फाईल आहे ना? आपण ती आधी बनवली होती)
 import { createClient } from '@/lib/supabase/server'
 
 export async function login(formData: FormData) {
+  // 3. createClient ला await करणे
   const supabase = await createClient()
 
-  // फॉर्ममधून डेटा घेणे
   const email = formData.get('email') as string
   const password = formData.get('password') as string
 
@@ -20,8 +24,9 @@ export async function login(formData: FormData) {
     return { error: 'लॉगिन अयशस्वी: ' + error.message }
   }
 
+  // 4. यशस्वी झाल्यास
   revalidatePath('/', 'layout')
-  redirect('/dashboard') // यशस्वी झाल्यावर डॅशबोर्डवर जा
+  redirect('/dashboard')
 }
 
 export async function signup(formData: FormData) {
@@ -29,22 +34,21 @@ export async function signup(formData: FormData) {
 
   const email = formData.get('email') as string
   const password = formData.get('password') as string
-  const fullName = formData.get('fullName') as string
 
   const { error } = await supabase.auth.signUp({
     email,
     password,
-    options: {
-      data: {
-        full_name: fullName, // युजरचे नाव डेटाबेसमध्ये सेव्ह करण्यासाठी
-      },
-    },
+    // टीप: ईमेल कन्फर्मेशन बंद केले असेल तरच हे थेट लॉगिन होईल
   })
 
   if (error) {
+    console.error("Signup Error:", error.message)
     return { error: 'साइन अप अयशस्वी: ' + error.message }
   }
 
   revalidatePath('/', 'layout')
   redirect('/dashboard')
 }
+
+// Google Login चे काम आपण Client Side (page.tsx) मधून करत आहोत,
+// त्यामुळे इथे त्याची गरज नाही.
