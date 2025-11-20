@@ -9,22 +9,24 @@ import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 
 export async function login(formData: FormData) {
-  // 3. createClient ला await करणे
   const supabase = await createClient()
 
   const email = formData.get('email') as string
   const password = formData.get('password') as string
 
-  const { error } = await supabase.auth.signInWithPassword({
+  console.log("Login attempt for:", email); // लॉग 1
+
+  const { data, error } = await supabase.auth.signInWithPassword({
     email,
     password,
   })
 
   if (error) {
+    console.error("Login Error from Supabase:", error.message); // लॉग 2
     return { error: 'लॉगिन अयशस्वी: ' + error.message }
   }
 
-  // 4. यशस्वी झाल्यास
+  console.log("Login Success! Redirecting..."); // लॉग 3
   revalidatePath('/', 'layout')
   redirect('/dashboard')
 }
