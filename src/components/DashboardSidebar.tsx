@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react"; // Added hooks
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation"; // Added useRouter
 import { 
   LayoutDashboard, 
   MessageSquare, 
@@ -14,6 +14,7 @@ import {
   BarChart3
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { createClient } from "@/lib/supabase/client"; // Import Supabase
 
 const menuItems = [
   { icon: LayoutDashboard, label: "Overview", href: "/dashboard" },
@@ -27,6 +28,28 @@ const menuItems = [
 
 export function DashboardSidebar() {
   const pathname = usePathname();
+  const router = useRouter();
+  const supabase = createClient();
+  
+  // State for dynamic user data
+  const [userEmail, setUserEmail] = useState("Loading...");
+
+  useEffect(() => {
+    async function getUser() {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user?.email) {
+        setUserEmail(user.email);
+      }
+    }
+    getUser();
+  }, []);
+
+  // The Logic to make the Logout button work
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    router.refresh();
+    router.push("/login");
+  };
 
   return (
     <aside className="w-64 bg-white border-r border-gray-200 h-screen flex flex-col fixed left-0 top-0 z-40 hidden md:flex">
@@ -63,11 +86,11 @@ export function DashboardSidebar() {
       <div className="p-4 border-t border-gray-100">
         <div className="bg-gray-50 rounded-xl p-4 mb-4">
           <div className="flex items-center gap-3 mb-2">
-             <div className="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold">
-               JD
+             <div className="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold uppercase">
+               {userEmail[0]}
              </div>
-             <div>
-               <div className="text-sm font-bold text-gray-900">John Doe</div>
+             <div className="overflow-hidden">
+               <div className="text-sm font-bold text-gray-900 truncate w-32">{userEmail}</div>
                <div className="text-xs text-gray-500">Pro Plan</div>
              </div>
           </div>
@@ -80,7 +103,12 @@ export function DashboardSidebar() {
           </div>
         </div>
 
-        <Button variant="ghost" className="w-full justify-start gap-3 text-red-500 hover:text-red-600 hover:bg-red-50">
+        {/* LOGOUT BUTTON WITH LOGIC */}
+        <Button 
+            variant="ghost" 
+            onClick={handleLogout} // Attached the function here
+            className="w-full justify-start gap-3 text-red-500 hover:text-red-600 hover:bg-red-50"
+        >
           <LogOut size={20} />
           Log Out
         </Button>
