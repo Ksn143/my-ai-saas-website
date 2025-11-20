@@ -1,12 +1,10 @@
 'use server'
 
-// 1. योग्य Imports
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
-// 2. createClient फंक्शन योग्यरित्या इम्पोर्ट करा
-// (तुमच्याकडे src/lib/supabase/server.ts ही फाईल आहे ना? आपण ती आधी बनवली होती)
 import { createClient } from '@/lib/supabase/server'
+import { headers } from "next/headers"; // Import this
 
 export async function login(formData: FormData) {
   const supabase = await createClient()
@@ -62,4 +60,36 @@ export async function signup(formData: FormData) {
     // 3. Redirect to a page telling them to check their email
     redirect('/verify-email')
   }
+}
+export async function forgotPassword(formData: FormData) {
+  const supabase = await createClient();
+  const email = formData.get("email") as string;
+  const origin = (await headers()).get("origin"); // Get the current domain automatically
+
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    // This ensures the user is redirected to a page where they can type a new password
+    redirectTo: `${origin}/auth/callback?next=/update-password`,
+  });
+
+  if (error) {
+    return { error: error.message };
+  }
+
+  return { success: true };
+}
+
+// 2. Action to SAVE the new password
+export async function updatePassword(formData: FormData) {
+  const supabase = await createClient();
+  const password = formData.get("password") as string;
+
+  const { error } = await supabase.auth.updateUser({
+    password: password,
+  });
+
+  if (error) {
+    return { error: error.message };
+  }
+
+  return { success: true };
 }
