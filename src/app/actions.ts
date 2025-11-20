@@ -37,20 +37,29 @@ export async function signup(formData: FormData) {
   const email = formData.get('email') as string
   const password = formData.get('password') as string
 
-  const { error } = await supabase.auth.signUp({
+  // 1. We need 'data' to check for the session
+  const { data, error } = await supabase.auth.signUp({
     email,
     password,
-    // टीप: ईमेल कन्फर्मेशन बंद केले असेल तरच हे थेट लॉगिन होईल
+    options: {
+      // This ensures that after clicking the link, they come back to your live site
+      emailRedirectTo: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/auth/callback`, 
+    }
   })
 
   if (error) {
     console.error("Signup Error:", error.message)
-    return { error: 'साइन अप अयशस्वी: ' + error.message }
+    return { error: 'Signup failed: ' + error.message }
   }
 
-  revalidatePath('/', 'layout')
-  redirect('/dashboard')
+  // 2. CRITICAL CHECK: 
+  // If "Confirm Email" is ON, data.session will be null.
+  // If "Confirm Email" is OFF, data.session will exist.
+  if (data.session) {
+    revalidatePath('/', 'layout')
+    redirect('/dashboard')
+  } else {
+    // 3. Redirect to a page telling them to check their email
+    redirect('/verify-email')
+  }
 }
-
-// Google Login चे काम आपण Client Side (page.tsx) मधून करत आहोत,
-// त्यामुळे इथे त्याची गरज नाही.
